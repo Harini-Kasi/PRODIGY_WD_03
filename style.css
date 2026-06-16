@@ -1,0 +1,202 @@
+/* === GLOBAL RESET === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+} 
+
+body { 
+  font-family: 'Poppins', sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at center, #0f0f1a, #000);
+  color: #fff;
+  overflow: hidden;
+}
+
+/* === MAIN CONTAINER === */
+.container {
+  text-align: center;
+  background: rgba(20, 20, 40, 0.8);
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+  border: 2px solid rgba(0, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  width: 90%;
+  max-width: 450px;
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* === TITLE === */
+h1 {
+  font-size: 2.2em;
+  background: linear-gradient(90deg, #00ffff, #ff00ff, #00ffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 15px;
+  text-shadow: 0 0 10px #0ff;
+}
+
+/* === MODE SELECTION BUTTONS === */
+.mode-selection {
+  margin-bottom: 15px;
+}
+
+.mode-selection button {
+  margin: 0 8px;
+  padding: 10px 22px;
+  font-size: 15px;
+  border: 2px solid #0ff;
+  color: #0ff;
+  background: transparent;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.mode-selection button:hover {
+  background: #0ff;
+  color: #000;
+  box-shadow: 0 0 15px #0ff, 0 0 30px #0ff;
+}
+
+.mode-selection button.active {
+  background: linear-gradient(90deg, #0ff, #f0f);
+  color: #000;
+  box-shadow: 0 0 20px #0ff, 0 0 30px #f0f;
+}
+
+/* === TURN INDICATOR & MESSAGE === */
+#turn-indicator, #message {
+  font-size: 17px;
+  margin: 10px 0;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 10px;
+  display: inline-block;
+  min-height: 25px;
+  letter-spacing: 1px;
+}
+
+#turn-indicator {
+  background: rgba(0, 255, 255, 0.1);
+  color: #0ff;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+#message {
+  background: rgba(255, 0, 255, 0.1);
+  color: #f0f;
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+}
+
+#message.draw {
+  background: rgba(255, 255, 0, 0.1);
+  color: #ff0;
+  box-shadow: 0 0 10px rgba(255, 255, 0, 0.4);
+}
+
+/* === GAME BOARD === */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-gap: 10px;
+  justify-content: center;
+  margin: 20px auto;
+  padding: 15px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.1);
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  border: 2px solid #0ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 45px;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 0 15px rgba(0, 255, 255, 0.2);
+}
+
+.cell:hover:not(.occupied):not(.winner) {
+  background: rgba(0, 255, 255, 0.1);
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #0ff;
+}
+
+.cell.X {
+  color: #00ffff;
+  text-shadow: 0 0 15px #0ff, 0 0 25px #0ff;
+}
+
+.cell.O {
+  color: #ff00ff;
+  text-shadow: 0 0 15px #f0f, 0 0 25px #f0f;
+}
+
+.cell.winner {
+  background: linear-gradient(45deg, #00ffff, #ff00ff);
+  color: #000;
+  animation: pulseGlow 0.8s infinite alternate;
+}
+
+@keyframes pulseGlow {
+  from { box-shadow: 0 0 10px #0ff; }
+  to { box-shadow: 0 0 25px #f0f; }
+}
+
+.cell.occupied {
+  cursor: default;
+}
+
+/* === RESET BUTTON === */
+#reset {
+  margin-top: 15px;
+  padding: 10px 25px;
+  font-size: 16px;
+  border: 2px solid #ff00ff;
+  color: #ff00ff;
+  background: transparent;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+}
+
+#reset:hover {
+  background: #ff00ff;
+  color: #000;
+  box-shadow: 0 0 20px #f0f, 0 0 40px #f0f;
+}
+
+/* === RESPONSIVE BOARD === */
+@media (max-width: 500px) {
+  .board {
+    grid-template-columns: repeat(3, 80px);
+    grid-gap: 8px;
+  }
+
+  .cell {
+    width: 80px;
+    height: 80px;
+    font-size: 36px;
+  }
+}
